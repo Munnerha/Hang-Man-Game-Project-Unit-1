@@ -1,0 +1,23 @@
+h1 {
+  font-family: 'Smokum', serif;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 5rem;
+  text-align: center
+}
+
+//body {
+  background: url(https://www.mediafire.com/convkey/d1d4/ughu6q1xv93rdbf9g.jpg?size_id=6) no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#hangman-svg {
+  display: block;
+  margin: 0 auto;
+  width: 400px;
+  height: 450px;
+}

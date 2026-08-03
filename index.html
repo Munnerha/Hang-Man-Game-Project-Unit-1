@@ -5,10 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman</title>
     <script defer src="./js/app.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Smokum&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-    <h1>Hangman</h1>
-    <p id="result-display"></p>
-</body>
-</html>
+        <h1>Hangman</h1>
+
+    </header>
+
+    <svg id="hangman-svg" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+      <g id="gallows" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round">
+        <line x1="10" y1="240" x2="150" y2="240" />
+        <line x1="40" y1="240" x2="40" y2="20" />
+        <line x1="40" y1="20" x2="120" y2="20" />
+        <line x1="120" y1="20" x2="120" y2="45" />
+      </g>
+
+      <circle id="head" cx="120" cy="65" r="20" stroke="#333" stroke-width="4" fill="none" visibility="hidden" />
+      <line id="body" x1="120" y1="85" x2="120" y2="150" stroke="#333" stroke-width="4" visibility="hidden" />
+      <line id="leftArm" x1="120" y1="100" x2="90" y2="130" stroke="#333" stroke-width="4" stroke-linecap="round" visibility="hidden" />
+      <line id="rightArm" x1="120" y1="100" x2="150" y2="130" stroke="#333" stroke-width="4" stroke-linecap="round" visibility="hidden" />
+      <line id="leftLeg" x1="120" y1="150" x2="95" y2="190" stroke="#333" stroke-width="4" stroke-linecap="round" visibility="hidden" />
+      <line id="rightLeg" x1="120" y1="150" x2="145" y2="190" stroke="#333" stroke-width="4" stroke-linecap="round" visibility="hidden" />
+    </svg>
+    <div id="letterButtons">
+        <button class="letterBtn">A</button>
+        <button class="letterBtn">B</button>
+        <button class="letterBtn">C</button>
+        <button class="letterBtn">D</button>
+        <button class="letterBtn">E</button>
+        <button class="letterBtn">F</button>
+        <button class="letterBtn">G</button>
+        <button class="letterBtn">H</button>
+        <button class="letterBtn">I</button>
+        <button class="letterBtn">J</button>
+        <button class="letterBtn">K</button>
+        <button class="letterBtn">L</button>
+        <button class="letterBtn">M</button>
+        <button class="letterBtn">N</button>
+        <button class="letterBtn">O</button>
+        <button class="letterBtn">P</button>
+        <button class="letterBtn">Q</button>
+        <button class="letterBtn">R</button>
+        <button class="letterBtn">S</button>
+        <button class="letterBtn">T</button>
+        <button class="letterBtn">U</button>
+        <button class="letterBtn">V</button>
+        <button class="letterBtn">W</button>
+        <button class="letterBtn">X</button>
+        <button class="letterBtn">Y</button>
+        <button class="letterBtn">Z</button>
+    </div>
+    <div id="wordDisplay"></div>
+    <div id="wrongGuesses"></div>
+    <div id="guessedLetters"></div>
+    <div id="message"></div>
+    <input type="text" id="letterInput" />
+    <button id="tryAgain">Try Again</button>
