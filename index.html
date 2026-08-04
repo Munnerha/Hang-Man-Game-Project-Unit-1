@@ -13,9 +13,12 @@
 <body>
     <header>
         <h1>Hangman</h1>
-
     </header>
-
+        <div id="actionButtons">
+            <button id="reveal">Reveal Word</button>
+            <button id="tryAgain">Try Again</button>
+        </div>
+        <div id="message"></div>
     <svg id="hangman-svg" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
       <g id="gallows" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round">
         <line x1="10" y1="240" x2="150" y2="240" />
@@ -62,6 +65,5 @@
     <div id="wordDisplay"></div>
     <div id="wrongGuesses"></div>
     <div id="guessedLetters"></div>
-    <div id="message"></div>
-    <input type="text" id="letterInput" />
-    <button id="tryAgain">Try Again</button>
+</body>
+</html>
