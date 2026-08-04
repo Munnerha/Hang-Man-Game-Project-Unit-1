@@ -30,3 +30,7 @@ Win: The player successfully guesses all the letters in the word before running 
 
 Loss: The player runs out of allowed attempts (typically 6 strikes for head, body, two arms, and two legs) before revealing the word.
 
+Assets Sources:
+1.Gemini for the background image
+2.Claude for the svg
+
