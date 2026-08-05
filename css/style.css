@@ -2,7 +2,7 @@ h1 {
   font-family: 'Smokum', serif;
   font-weight: 200;
   font-style: normal;
-  font-size: 5rem;
+  font-size: 4rem;
   text-align: center
 }
 
@@ -19,7 +19,7 @@ body {
   display: block;
   margin: 0 auto;
   width: 400px;
-  height: 450px;
+  height: 350px;
 }
 
 #letterButtons {
@@ -30,8 +30,8 @@ body {
 }
 
 .letterBtn {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   font-size: 1.5rem;
   margin: 5px;
   cursor: pointer;
@@ -59,9 +59,18 @@ body {
 }
 
 #reveal,
-#tryAgain {
+#tryAgain,
+#nextLevel {
   padding: 12px 24px;
   font-size: 1.2rem;
   cursor: pointer;
   border-radius: 6px;
+}
+
+#levelCounter {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #000000;
 }

@@ -2,10 +2,14 @@
 
 // Define constants for hangman body parts. (head, body, left arm, right arm, left leg, right leg)
 const hangmanBodyParts = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
-// Define constant for "Try Again" button text.
-const tryAgainsText = 'Try Again';
-// Define constant for wordList
-const wordList = ['JAVASCRIPT', 'PYTHON', 'LOOP', 'REACT', 'FUNCTION','ARRAY', 'OBJECT'];
+
+// Word lists by level, easiest to hardest
+const wordLevels = [
+  ['LOOP', 'CODE', 'ARRAY', 'CLASS', 'REACT', 'STYLE'], // Level 1
+  ['OBJECT', 'PYTHON', 'BOOLEAN', 'BROWSER', 'VARIABLE'], // Level 2
+  ['FUNCTION', 'JAVASCRIPT', 'PARAMETER', 'ITERATION', 'CALLBACK'] // Level 3
+];
+
 const winMessage = 'Congratulations! You guessed the word!';
 const loseMessage = 'Game Over!';
 
@@ -15,6 +19,7 @@ let guessedLetters = new Set();
 let maxMistakes = hangmanBodyParts.length;
 let wrongGuessesCount = 0;
 let secretWord = '';
+let currentLevel = 0;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -25,12 +30,22 @@ const messageEl = document.querySelector('#message');
 const bodyPartsEls = hangmanBodyParts.map(part => document.querySelector(`#${part}`));
 const tryAgainBtn = document.querySelector('#tryAgain');
 const revealWordBtn = document.querySelector('#reveal');
+const nextLevelBtn = document.querySelector('#nextLevel');
 const letterButtonsEl = document.querySelector('#letterButtons');
+const wrongSoundEl = document.querySelector('#wrongSound');
+const levelCounterEl = document.querySelector('#levelCounter');
 
 /*-------------------------------- Functions --------------------------------*/
 
+// Updates the level counter display (1-indexed for the player)
+function renderLevelCounter() {
+  levelCounterEl.textContent = `Level ${currentLevel + 1} of ${wordLevels.length}`;
+}
+
+// Selects a random word from the current level's word list
 function pickWord() {
-  secretWord = wordList[Math.floor(Math.random() * wordList.length)];
+  const currentWordList = wordLevels[currentLevel];
+  secretWord = currentWordList[Math.floor(Math.random() * currentWordList.length)];
 }
 
 function handleWrongGuess() {
@@ -60,6 +75,7 @@ function checkWin() {
   if (isWordComplete) {
     messageEl.textContent = winMessage;
     disableLetterButtons();
+    nextLevelBtn.disabled = false;
   }
 }
 
@@ -68,6 +84,9 @@ function checkLose() {
   if (wrongGuessesCount >= maxMistakes) {
     messageEl.textContent = loseMessage;
     disableLetterButtons();
+    nextLevelBtn.disabled = true;
+    wrongSoundEl.currentTime = 0;
+    wrongSoundEl.play();
   }
 }
 
@@ -77,8 +96,27 @@ function disableLetterButtons() {
   allLetterBtns.forEach(btn => btn.disabled = true);
 }
 
+// Resets shared game state (used by both Try Again and Next Level)
+function resetBoard() {
+  guessedLetters.clear();
+  wrongGuessesCount = 0;
+  secretWord = '';
+  messageEl.textContent = '';
+
+  pickWord();
+  renderWordDisplay();
+  renderLevelCounter();
+  bodyPartsEls.forEach(part => part.setAttribute('visibility', 'hidden'));
+
+  const allLetterBtns = letterButtonsEl.querySelectorAll('.letterBtn');
+  allLetterBtns.forEach(btn => btn.disabled = false);
+
+  nextLevelBtn.disabled = true;
+}
+
 // Checks a guessed letter against the secret word
 // and updates the game accordingly
+// Also greys out the button for the guessed letter
 function processGuess(guessedLetter) {
   if (guessedLetters.has(guessedLetter)) return;
 
@@ -87,8 +125,10 @@ function processGuess(guessedLetter) {
   if (secretWord.includes(guessedLetter)) {
     renderWordDisplay();
     checkWin();
+    disableButton(event.target);
   } else {
     handleWrongGuess();
+    disableButton(event.target);
     checkLose();
   }
 }
@@ -110,23 +150,23 @@ letterButtonsEl.addEventListener('click', function (event) {
 
 // Event listener for the Reveal Word button
 revealWordBtn.addEventListener('click', function () {
-  messageEl.textContent = `The secret word was: ${secretWord}`;
+  wordDisplayEl.textContent = secretWord.split('').join(' ');
 });
 
-// Try Again resets game state, clears message, hides body parts,
-// and re-enables letter buttons
+// Try Again resets the entire game back to Level 1
 tryAgainBtn.addEventListener('click', function () {
-  guessedLetters.clear();
-  wrongGuessesCount = 0;
-  secretWord = '';
-  messageEl.textContent = '';
+  currentLevel = 0;
+  resetBoard();
+});
 
-  pickWord();
-  renderWordDisplay();
-  bodyPartsEls.forEach(part => part.setAttribute('visibility', 'hidden'));
-
-  const allLetterBtns = letterButtonsEl.querySelectorAll('.letterBtn');
-  allLetterBtns.forEach(btn => btn.disabled = false);
+// Next Level advances to the next word list, if one exists
+nextLevelBtn.addEventListener('click', function () {
+  if (currentLevel < wordLevels.length - 1) {
+    currentLevel += 1;
+    resetBoard();
+  } else {
+    messageEl.textContent = "You've completed the final level!";
+  }
 });
 
 /*----------------------------- Game Start -----------------------------*/
@@ -134,3 +174,5 @@ tryAgainBtn.addEventListener('click', function () {
 // Starts the game by picking a word and rendering the initial blank display
 pickWord();
 renderWordDisplay();
+renderLevelCounter();
+nextLevelBtn.disabled = true;
