@@ -6,7 +6,7 @@ const hangmanBodyParts = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rig
 // Word lists by level, easiest to hardest
 const wordLevels = [
   ['CAT', 'DOG', 'DESK'], // Level 1
-  ['LAPTOP' , 'WALLET', 'PHONE'], // Level 2
+  ['LAPTOP', 'WALLET', 'PHONE'], // Level 2
   ['APARTMENT', 'CALENDAR', 'UMBRELLA'] // Level 3
 ];
 
@@ -58,12 +58,19 @@ function revealNextBodyPart() {
   if (partEl) partEl.setAttribute('visibility', 'visible');
 }
 
-//show the blanks/letters
+// Builds the word display by checking each letter against guessedLetters
 function renderWordDisplay() {
-  wordDisplayEl.textContent = secretWord
-    .split('')
-    .map(letter => guessedLetters.has(letter) ? letter : '_')
-    .join(' ');
+  const revealedLetters = [];
+
+  for (const letter of secretWord) {
+    if (guessedLetters.has(letter)) {
+      revealedLetters.push(letter);
+    } else {
+      revealedLetters.push('_');
+    }
+  }
+
+  wordDisplayEl.textContent = revealedLetters.join(' ');
 }
 
 // Checks if every letter in secretWord has been guessed
