@@ -24,8 +24,6 @@ let currentLevel = 0;
 /*------------------------ Cached Element References ------------------------*/
 
 const wordDisplayEl = document.querySelector('#wordDisplay');
-const wrongGuessesEl = document.querySelector('#wrongGuesses');
-const guessedLettersEl = document.querySelector('#guessedLetters');
 const messageEl = document.querySelector('#message');
 const bodyPartsEls = hangmanBodyParts.map(part => document.querySelector(`#${part}`));
 const tryAgainBtn = document.querySelector('#tryAgain');
