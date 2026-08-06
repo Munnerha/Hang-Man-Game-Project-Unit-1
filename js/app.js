@@ -5,9 +5,9 @@ const hangmanBodyParts = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rig
 
 // Word lists by level, easiest to hardest
 const wordLevels = [
-  ['LOOP', 'CODE', 'ARRAY', 'CLASS', 'REACT', 'STYLE'], // Level 1
-  ['OBJECT', 'PYTHON', 'BOOLEAN', 'BROWSER', 'VARIABLE'], // Level 2
-  ['FUNCTION', 'JAVASCRIPT', 'PARAMETER', 'ITERATION', 'CALLBACK'] // Level 3
+  ['CAT', 'DOG', 'DESK'], // Level 1
+  ['LAPTOP' , 'WALLET', 'PHONE'], // Level 2
+  ['APARTMENT', 'CALENDAR', 'UMBRELLA'] // Level 3
 ];
 
 const winMessage = 'Congratulations! You guessed the word!';
