@@ -33,4 +33,14 @@ Loss: The player runs out of allowed attempts (typically 6 strikes for head, bod
 Assets Sources:
 1.Gemini for the background image
 2.Claude for the svg
+3.Audio clip: [text](https://www.youtube.com/watch?v=r6JK-gRELI0)
 
+How to Play:
+Pick letters until you complete the word. Make 6 mistakes and you will lose
+The game has 3 levels, from easiest to most difficult
+
+![Screenshot](image.png)
+
+Tech used: JavaScript, HTML and CSS
+
+To be added: hints for the guessed words

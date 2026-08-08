@@ -51,6 +51,7 @@ function handleWrongGuess() {
   revealNextBodyPart();
 }
 
+// Reveals the next body part in the hangman figure based on wrongGuessesCount
 function revealNextBodyPart() {
   const partEl = bodyPartsEls[wrongGuessesCount - 1];
   if (partEl) partEl.setAttribute('visibility', 'visible');
@@ -71,7 +72,8 @@ function renderWordDisplay() {
   wordDisplayEl.textContent = revealedLetters.join(' ');
 }
 
-// Checks if every letter in secretWord has been guessed
+// Checks if every letter in secretWord has been guessed, and if so, 
+// displays a win message and disables further guesses (buttons)
 function checkWin() {
   const isWordComplete = secretWord
     .split('')
